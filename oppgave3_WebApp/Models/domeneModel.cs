@@ -28,5 +28,6 @@ namespace oppgave3_WebApp.Models
         [RegularExpression("[0-9]{1,2}", ErrorMessage = "Antall år må oppgis (1-2 siffer)")]
         public int antallAar { get; set; }
 
+
     }
 }
