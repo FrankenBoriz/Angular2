@@ -1,0 +1,66 @@
+﻿<div>
+    <h1>Lånesøknad</h1>
+    <form [formGroup]="Form">
+
+        <div class="form-group">
+            <label>Personnummer:</label>
+            <input type="text" class="form-control" formControlName="personnummer" placeholder="11 tall" maxlength="11" />
+            <div class="alert alert-danger" *ngIf="Form.controls['personnummer'].hasError('pattern')" >Du må skrive inn personnummer(11 siffer)</div>
+        </div>
+
+        <div class="form-group">
+            <label>Tlf:</label>
+            <input type="text" class="form-control" formControlName="tlf" placeholder="8 tall" maxlength="8" />
+            <div class="alert alert-danger" *ngIf="Form.controls['tlf'].hasError('pattern')">Du må skrive inn telefonnummer(8 siffer)</div>
+        </div>
+
+        <div class="form-group">
+            <label>Epost:</label>
+            <input type="text" class="form-control" formControlName="epost" placeholder="eksempel: hakon123@live.no" maxlength="30" />
+            <div class="alert alert-danger" *ngIf="Form.controls['epost'].hasError('pattern')">Du må skrive inn epost(abc@def.gh)</div>
+        </div>
+
+        <div class="form-group">
+            <label>Lånebeløp:</label>
+            <input type="text" class="form-control" formControlName="lanebelop" (input)="utregnlan()" maxlength="6" />
+            <div class="alert alert-danger" *ngIf="Form.controls['lanebelop'].hasError('pattern')">Du må skrive inn lånebeløp(3-6 siffer)</div>
+        </div>
+
+        <div class="form-group">
+            <label>Antall år:</label>
+            <input type="text" class="form-control" formControlName="aar" (input)="utregnlan()" maxlength="2" />
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Utregnet betaling:</div>
+            <div class="panel-body">
+                {{resultat}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button (click)="onSubmit()" class="btn btn-primary btn-lg btn-block" [disabled]="!Form.valid">Registrer lån</button>
+        </div>
+
+        <button (click)="visListeKlikk()" class="btn  btn-success " id="liste">Admin</button>
+
+        <div [hidden]="!show">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Personnummer</th>
+                    <th>Tlf</th>
+                    <th>Epost</th>
+                    <th>Lånebeløp</th>
+                    <th>Ant. År</th>
+                </tr>
+                <tr *ngFor="let k of liste">
+                    <td>{{k.personnummer}}  </td>
+                    <td>{{k.tlf}} </td>
+                    <td>{{k.epost}} </td>
+                    <td>{{k.laneBelop}} </td>
+                    <td>{{k.antallAar}} </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
